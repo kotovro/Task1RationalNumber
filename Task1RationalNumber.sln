@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35806.99
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task1RationalNumber", "Task1RationalNumber\Task1RationalNumber.csproj", "{D64BD642-AE71-41A7-AE0B-1970ACDE7843}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForDelete", "..\..\..\Users\kotvo\source\repos\ForDelete\ForDelete.csproj", "{55A24C1D-D0E6-4D39-AB6B-66752925B890}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D64BD642-AE71-41A7-AE0B-1970ACDE7843}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D64BD642-AE71-41A7-AE0B-1970ACDE7843}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D64BD642-AE71-41A7-AE0B-1970ACDE7843}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D64BD642-AE71-41A7-AE0B-1970ACDE7843}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55A24C1D-D0E6-4D39-AB6B-66752925B890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55A24C1D-D0E6-4D39-AB6B-66752925B890}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55A24C1D-D0E6-4D39-AB6B-66752925B890}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55A24C1D-D0E6-4D39-AB6B-66752925B890}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C8B6A113-3519-44AD-944C-28AA2BE38B4F}
+	EndGlobalSection
+EndGlobal

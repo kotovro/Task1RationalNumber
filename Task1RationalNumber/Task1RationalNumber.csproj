@@ -25,4 +25,10 @@
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
     <PackageReference Include="ReactiveUI" Version="20.1.63" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\MessageBox.axaml.cs">
+      <DependentUpon>MessageBox.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

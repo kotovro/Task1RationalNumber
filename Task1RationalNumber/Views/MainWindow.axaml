@@ -10,21 +10,25 @@
 		
         Icon="/Assets/avalonia-logo.ico"
         Title="Rational number">
-
+	<Window.Styles>
+		<Style Selector="Button">
+			<Setter Property="Background" Value="Green"/>
+		</Style>
+	</Window.Styles>
     <Design.DataContext>
 		<!--This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs)-->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-
-    <StackPanel DataContext="{Binding ReactiveViewModel}">    
-	    <Grid ColumnDefinitions="Auto, Auto" RowDefinitions="Auto, Auto, Auto">
-
+	<Grid DataContext="{Binding ReactiveViewModel}" ColumnDefinitions="Auto, Auto, Auto, Auto, Auto" RowDefinitions="Auto, Auto, Auto, Auto, Auto">	  
 			<TextBlock Text="Numerator" Grid.Row="0" Grid.Column="0" />
-			<TextBlock Text="Denominator" Grid.Row="1" Grid.Column="0" />
-			<TextBox x:Name="NumeratorTextBox" Text="{Binding Numerator}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" />
-	        <TextBox x:Name="DenominatorTextBox" Text="Denominator" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1"/>
-		    <Button x:Name="submitImput" Content="Create number" Grid.Row="2"/>
-	    </Grid>
-	</StackPanel>
+			<TextBox x:Name="NumeratorTextBox" Text="{Binding Numerator}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1"/>
+			<TextBlock Text="Denominator" Grid.Row="2" Grid.Column="0" />
+			<TextBox x:Name="DenominatorTextBox" Text="{Binding Denominator}" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.Row="2" Grid.Column="1"/>
+			<Border Height="2" Background="Black" Margin="5,0" Grid.Row="1" Grid.Column="1"/>
+			<ComboBox ItemsSource="{Binding Statuses}" SelectedItem="{Binding SelectedStatus}" Grid.Row="1" Grid.Column="3"  IsEnabled="{Binding Enabled}"/>
+			<TextBox Text="{Binding Numerator}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="4" Grid.Column="4" IsVisible="{Binding Visible}"/>
+
+	</Grid>
+
 </Window>

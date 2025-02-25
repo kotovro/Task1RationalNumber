@@ -16,7 +16,7 @@ namespace Task1RationalNumber.ViewModels
         {
             
         }
-        public enum Status
+        public enum OperationType
         {
             ToString,
             Multiply,
@@ -25,55 +25,51 @@ namespace Task1RationalNumber.ViewModels
             Simplify
         }
 
-        private Status _SelectedStatus;
-        public ObservableCollection<Status> Statuses { get; } = new(Enum.GetValues(typeof(Status)).Cast<Status>());
-        public Status SelectedStatus
+        private OperationType _SelectedOperation;
+        public ObservableCollection<OperationType> Operations { get; } = new(Enum.GetValues(typeof(OperationType)).Cast<OperationType>());
+        public OperationType SelectedOperation
         {
             get
             {
-                return _SelectedStatus;
+                return _SelectedOperation;
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref _SelectedStatus, value);
+                this.RaiseAndSetIfChanged(ref _SelectedOperation, value);
+                this.RaisePropertyChanged(nameof(VisibleToString));
             }
         }
 
-        private RationalNumber firstNum = new RationalNumber();
+        private RationalNumber baseNum = new RationalNumber();
         private string? _Numerator;
         private string? _Denominator;
-        private bool _Enabled = false;
-        private bool _Visible = false; 
 
-        private void updateModel(string num, string denom)
+        private bool _Enabled = false;
+
+        private void updateModel()
         {
-            firstNum.Numerator = Int32.Parse(num);
-            firstNum.Denominator = Int32.Parse(denom);
+            baseNum.Numerator = Int32.Parse(Numerator);
+            baseNum.Denominator = Int32.Parse(Denominator);
+            this.RaisePropertyChanged(nameof(ToStringText));
         }
+
 
         [Required]
         public string? Numerator
         {
-            get
-            {
-                return _Numerator;
-            }
+            get => _Numerator;
             set
             {
                 this.RaiseAndSetIfChanged(ref _Numerator, value);
                 if ((!string.IsNullOrWhiteSpace(Numerator) && Regex.IsMatch(Numerator, "^[0-9]+$")) 
                     && (!string.IsNullOrWhiteSpace(Denominator) && Regex.IsMatch(Denominator, "^[0-9]+$")))
                 {
-                    updateModel(Numerator, Denominator);
-                    Enabled = true;
-                    Visible = true;
-                    this.RaisePropertyChanged(nameof(Enabled));
-                    //this.RaisePropertyChanged(nameof(Visible));
+                    updateModel();
+                    IsOperationEnabled = true;
                 }
                 else
                 {
-                    _Enabled = false;
-                    this.RaisePropertyChanged(nameof(Enabled));
+                    IsOperationEnabled = false;
                 }
             }
         }
@@ -81,52 +77,43 @@ namespace Task1RationalNumber.ViewModels
         [Required]
         public string? Denominator
         {
-            get
-            {
-                return _Denominator;
-            }
+            get => _Denominator;
             set
             {
                 this.RaiseAndSetIfChanged(ref _Denominator, value);
                 if ((!string.IsNullOrWhiteSpace(Numerator) && Regex.IsMatch(Numerator, "^[0-9]+$")) 
                     && (!string.IsNullOrWhiteSpace(Denominator) && Regex.IsMatch(Denominator, "^[0-9]+$")))
                 {
-                    _Enabled = true;
-                    updateModel(Numerator, Denominator);
-                    this.RaisePropertyChanged(nameof(Enabled));
+                    updateModel();
+                    IsOperationEnabled = true;
                 }
                 else
                 {
-                    _Enabled = false;
-                    this.RaisePropertyChanged(nameof(Enabled));
+                    IsOperationEnabled = false;
                 }
             }
         }
 
-        public bool Enabled
+        public bool IsOperationEnabled
         {
-            get
-            {
-                return _Enabled;
-            }
+            get => _Enabled;
             set
             {
                 _Enabled = value;
-                Visible = value;
+                this.RaisePropertyChanged(nameof(IsOperationEnabled));
+                this.RaisePropertyChanged(nameof(VisibleToString));
+
             }
         }
 
-        public bool Visible
+        public bool VisibleToString
         {
-            get
-            {
-                return _Visible;
-            }
-            set
-            {
-                _Visible = value;
-                this.RaisePropertyChanged(nameof(Visible));
-            }
+            get => IsOperationEnabled && SelectedOperation ==  OperationType.ToString;
+        }
+
+        public string ToStringText
+        {
+            get => baseNum.ToString();
         }
     }
 

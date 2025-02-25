@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Schema;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Task1RationalNumber.Models
 {
-    class RationalNumber
+    class RationalNumber : Object
     {
 
         public RationalNumber(int numerator, int denominator)
@@ -18,8 +17,8 @@ namespace Task1RationalNumber.Models
                 //todo: tgink about passing exceptions to higer levels and how to display them
                 throw new ArgumentException("Denominator cannot be zero", nameof(denominator));
             }
-            _Numerator = numerator;
-            _Denominator = denominator;
+            Numerator = numerator;
+            Denominator = denominator;
         }
 
         public RationalNumber(double number, int maxDenominator = 100000) 
@@ -31,8 +30,8 @@ namespace Task1RationalNumber.Models
 
             if (frac == 0.0)
             {
-                _Numerator = sign * a;
-                _Denominator = 1;
+                Numerator = sign * a;
+                Denominator = 1;
             }
 
             int num1 = 1, num2 = 0;
@@ -65,51 +64,41 @@ namespace Task1RationalNumber.Models
                     {
                         break;
                     }
-                    _Numerator = sign * num;
-                    _Denominator = den;
+                    Numerator = sign * num;
+                    Denominator = den;
                 }
             }
-            _Numerator = sign * num1;
-            _Denominator = den1;
+            Numerator = sign * num1;
+            Denominator = den1;
         }
 
         public RationalNumber()
         {
-            this._Numerator = 0;
-            this._Denominator = 0;
+            Numerator = 0;
+            Denominator = 0;
         }
+ 
+        public int Numerator { get; set; }
 
-        private int _Numerator; 
-        public int Numerator
-        {   
-            get { return this.Numerator;  }
-            set { this._Numerator = value; } 
-        }
-
-        private int _Denominator;
-        public int Denominator
-        {
-            get { return this.Denominator; }
-            set { this._Denominator = value; }
-        }
+        public int Denominator { get; set; }
 
         public static RationalNumber operator +(RationalNumber number) => number;
-        public static RationalNumber operator -(RationalNumber fraction) => new RationalNumber(-fraction._Numerator, fraction._Denominator);
+        public static RationalNumber operator -(RationalNumber fraction) => new RationalNumber(-fraction.Numerator, fraction.Denominator);
         public static RationalNumber operator +(RationalNumber a, RationalNumber b)
-        => new RationalNumber(a._Numerator * b._Denominator + b._Numerator * a._Denominator, a._Denominator * b._Denominator);
+        => new RationalNumber(a.Numerator * b.Denominator + b.Numerator * a.Denominator, a.Denominator * b.Denominator);
         public static RationalNumber operator -(RationalNumber a, RationalNumber b)
         => a + (-b);
         public static RationalNumber operator *(RationalNumber a, RationalNumber b)
-        => new RationalNumber(a._Numerator * b._Numerator, a._Denominator * b._Denominator);
+        => new RationalNumber(a.Numerator * b.Numerator, a.Denominator * b.Denominator);
 
         public static RationalNumber operator /(RationalNumber a, RationalNumber b)
         {
-            if (b._Numerator == 0)
+            if (b.Numerator == 0)
             {
                 //todo: display exceptioms on higer levels
                 throw new DivideByZeroException();
             }
-            return new RationalNumber(a._Numerator * b._Denominator, a._Denominator * b._Numerator);
+            return new RationalNumber(a.Numerator * b.Denominator, a.Denominator * b.Numerator);
         }
 
         public void Reduce()
@@ -119,31 +108,31 @@ namespace Task1RationalNumber.Models
             //    throw new ArgumentException("Denominator cannot be zero.");
             //}
 
-            int gcd = GCD(Math.Abs(this._Numerator), Math.Abs(this._Denominator));
+            int gcd = GCD(Math.Abs(this.Numerator), Math.Abs(this.Denominator));
 
-            this._Numerator /= gcd;
-            this._Denominator /= gcd;
+            Numerator /= gcd;
+            Denominator /= gcd;
 
-            if (this._Denominator < 0)
+            if (Denominator < 0)
             {
-                this._Numerator = -this._Numerator;
-                this._Denominator = -this._Denominator;
+                Numerator = -Numerator;
+                Denominator = -Denominator;
             }
         }
 
-        public static double toDouble(RationalNumber number) 
+        public double ToDouble() 
         {
-            return number._Numerator / number._Denominator;
+            return Numerator / Denominator;
         }
 
-        public static double toDouble(RationalNumber number, int precision)
+        public double ToDouble(int precision)
         {
-            return double.Round(number._Numerator / number._Denominator, precision);
+            return double.Round(Numerator / Denominator, precision);
         }
 
         public override string ToString()
         {
-            return _Numerator.ToString() + " / " + _Denominator.ToString(); 
+            return $"{Numerator} / {Denominator}"; 
         }
 
         //todo: maybe refactor and place it in other module

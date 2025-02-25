@@ -39,8 +39,8 @@
 				<TextBlock Text="Denominator" Grid.Row="2" Grid.Column="0" />
 				<TextBox x:Name="DenominatorTextBox" Text="{Binding Denominator}" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.Row="2" Grid.Column="1"/>
 				<Border Height="2" Background="Black" Margin="5,0" Grid.Row="1" Grid.Column="1"/>
-				<ComboBox ItemsSource="{Binding Statuses}" SelectedItem="{Binding SelectedStatus}" Grid.Row="1" Grid.Column="3"  IsEnabled="{Binding Enabled}"/>
-				<TextBox  x:Name="MyTextBox" HorizontalAlignment="Left"  Grid.Row="4" Grid.Column="4" IsVisible="{Binding Visible}">
+				<ComboBox ItemsSource="{Binding Operations}" SelectedItem="{Binding SelectedOperation}" Grid.Row="1" Grid.Column="3"  IsEnabled="{Binding IsOperationEnabled}"/>
+				<TextBox  x:Name="MyTextBox" Text="{Binding ToStringText}" HorizontalAlignment="Left"  Grid.Row="4" Grid.Column="4" IsVisible="{Binding VisibleToString}">
 			 </TextBox>
 		</Grid>
 		

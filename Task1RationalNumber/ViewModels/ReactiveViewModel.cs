@@ -1,7 +1,9 @@
-﻿using ReactiveUI;
+﻿using Avalonia.Data.Converters;
+using ReactiveUI;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Task1RationalNumber.Models;
@@ -16,7 +18,7 @@ namespace Task1RationalNumber.ViewModels
         }
         public enum Status
         {
-            Convert_to_string,
+            ToString,
             Multiply,
             Add,
             Subtract,
@@ -59,12 +61,14 @@ namespace Task1RationalNumber.ViewModels
             set
             {
                 this.RaiseAndSetIfChanged(ref _Numerator, value);
-                if ((_Numerator is not null && Regex.IsMatch(_Numerator, "^[0-9]+$")) 
-                    && (_Denominator is not null && Regex.IsMatch(_Denominator, "^[0-9]+$")))
+                if ((!string.IsNullOrWhiteSpace(Numerator) && Regex.IsMatch(Numerator, "^[0-9]+$")) 
+                    && (!string.IsNullOrWhiteSpace(Denominator) && Regex.IsMatch(Denominator, "^[0-9]+$")))
                 {
-                    _Enabled = true;
-                    updateModel(_Numerator, _Denominator);
+                    updateModel(Numerator, Denominator);
+                    Enabled = true;
+                    Visible = true;
                     this.RaisePropertyChanged(nameof(Enabled));
+                    //this.RaisePropertyChanged(nameof(Visible));
                 }
                 else
                 {
@@ -73,6 +77,7 @@ namespace Task1RationalNumber.ViewModels
                 }
             }
         }
+
         [Required]
         public string? Denominator
         {
@@ -83,11 +88,11 @@ namespace Task1RationalNumber.ViewModels
             set
             {
                 this.RaiseAndSetIfChanged(ref _Denominator, value);
-                if ((_Numerator is not null && Regex.IsMatch(_Numerator, "^[0-9]+$")) 
-                    && (_Denominator is not null && Regex.IsMatch(_Denominator, "^[0-9]+$")))
+                if ((!string.IsNullOrWhiteSpace(Numerator) && Regex.IsMatch(Numerator, "^[0-9]+$")) 
+                    && (!string.IsNullOrWhiteSpace(Denominator) && Regex.IsMatch(Denominator, "^[0-9]+$")))
                 {
                     _Enabled = true;
-                    updateModel(_Numerator, _Denominator);
+                    updateModel(Numerator, Denominator);
                     this.RaisePropertyChanged(nameof(Enabled));
                 }
                 else
@@ -95,7 +100,6 @@ namespace Task1RationalNumber.ViewModels
                     _Enabled = false;
                     this.RaisePropertyChanged(nameof(Enabled));
                 }
-
             }
         }
 
@@ -107,8 +111,8 @@ namespace Task1RationalNumber.ViewModels
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref _Enabled, value);
-                _Enabled = true;
+                _Enabled = value;
+                Visible = value;
             }
         }
 
@@ -120,8 +124,8 @@ namespace Task1RationalNumber.ViewModels
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref _Visible, value);
-                _Visible = true;
+                _Visible = value;
+                this.RaisePropertyChanged(nameof(Visible));
             }
         }
     }

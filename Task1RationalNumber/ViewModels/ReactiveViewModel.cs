@@ -36,7 +36,8 @@ namespace Task1RationalNumber.ViewModels
             set
             {
                 this.RaiseAndSetIfChanged(ref _SelectedOperation, value);
-                this.RaisePropertyChanged(nameof(VisibleToString));
+                this.RaisePropertyChanged(nameof(IsToStringVisible));
+                this.RaisePropertyChanged(nameof(IsMultiplyVisible));
             }
         }
 
@@ -44,17 +45,33 @@ namespace Task1RationalNumber.ViewModels
         private RationalNumber operandNum = new RationalNumber();
         private string? _Numerator;
         private string? _Denominator;
+        private string? _OperandNumerator;
+        private string? _OperandDenominator;
+
         private const string RegexForInt = "^[-]*?[0-9]+$";
 
         private bool _Enabled = false;
 
-        private void updateModel()
+        private void updateBaseModel()
         {
             baseNum.Numerator = Int32.Parse(Numerator);
             baseNum.Denominator = Int32.Parse(Denominator);
             this.RaisePropertyChanged(nameof(ToStringText));
+            if (IsMultiplyVisible)
+            {
+                this.RaisePropertyChanged(nameof(Multiply));
+            }
         }
 
+        private void updateOperandModel()
+        {
+            operandNum.Numerator = Int32.Parse(OperandNumerator);
+            operandNum.Denominator = Int32.Parse(OperandDenominator);
+            if (IsMultiplyVisible)
+            {
+                this.RaisePropertyChanged(nameof(Multiply));
+            }
+        }
 
         [Required]
         public string? Numerator
@@ -66,7 +83,7 @@ namespace Task1RationalNumber.ViewModels
                 if ((!string.IsNullOrWhiteSpace(Numerator) && Regex.IsMatch(Numerator.Trim(), RegexForInt)) 
                     && (!string.IsNullOrWhiteSpace(Denominator) && Regex.IsMatch(Denominator.Trim(), RegexForInt)))
                 {
-                    updateModel();
+                    updateBaseModel();
                     IsOperationEnabled = true;
                 }
                 else
@@ -86,12 +103,42 @@ namespace Task1RationalNumber.ViewModels
                 if ((!string.IsNullOrWhiteSpace(Numerator) && Regex.IsMatch(Numerator, RegexForInt)) 
                     && (!string.IsNullOrWhiteSpace(Denominator) && Regex.IsMatch(Denominator, RegexForInt)))
                 {
-                    updateModel();
+                    updateBaseModel();
                     IsOperationEnabled = true;
                 }
                 else
                 {
                     IsOperationEnabled = false;
+                }
+            }
+        }
+
+        [Required]
+        public string? OperandNumerator
+        {
+            get => _OperandNumerator;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _OperandNumerator, value);
+                if ((!string.IsNullOrWhiteSpace(OperandNumerator) && Regex.IsMatch(OperandNumerator.Trim(), RegexForInt))
+                    && (!string.IsNullOrWhiteSpace(OperandDenominator) && Regex.IsMatch(OperandDenominator.Trim(), RegexForInt)))
+                {
+                    updateOperandModel();
+                }
+            }
+        }
+
+        [Required]
+        public string? OperandDenominator
+        {
+            get => _OperandDenominator;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _OperandDenominator, value);
+                if ((!string.IsNullOrWhiteSpace(OperandNumerator) && Regex.IsMatch(OperandNumerator, RegexForInt))
+                    && (!string.IsNullOrWhiteSpace(OperandDenominator) && Regex.IsMatch(OperandDenominator, RegexForInt)))
+                {
+                    updateOperandModel();
                 }
             }
         }
@@ -103,13 +150,13 @@ namespace Task1RationalNumber.ViewModels
             {
                 _Enabled = value;
                 this.RaisePropertyChanged(nameof(IsOperationEnabled));
-                this.RaisePropertyChanged(nameof(VisibleToString));
-                this.RaisePropertyChanged(nameof(VisibleMultiply));
+                this.RaisePropertyChanged(nameof(IsToStringVisible));
+                this.RaisePropertyChanged(nameof(IsMultiplyVisible));
 
             }
         }
 
-        public bool VisibleToString
+        public bool IsToStringVisible
         {
             get => IsOperationEnabled && SelectedOperation ==  OperationType.ToString;
         }
@@ -119,7 +166,7 @@ namespace Task1RationalNumber.ViewModels
             get => baseNum.ToString();
         }
 
-        public bool VisibleMultiply
+        public bool IsMultiplyVisible
         {
             get => IsOperationEnabled && SelectedOperation == OperationType.Multiply;
         }

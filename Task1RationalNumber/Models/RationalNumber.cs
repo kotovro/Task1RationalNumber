@@ -132,7 +132,29 @@ namespace Task1RationalNumber.Models
 
         public override string ToString()
         {
-            return $"{Numerator} / {Denominator}"; 
+            if (Numerator == 0)
+            {
+                if (Denominator == 0)
+                {
+                    return "Undefined";
+                }
+                else 
+                {
+                    return "0";
+                }
+            }
+            if (Denominator == 0)
+            {
+                return "infinity(∞)";
+            }
+
+            if (Numerator < 0 && Denominator > 0 || Numerator > 0 && Denominator < 0)
+            {
+                return $"-{Numerator} / {Math.Abs(Denominator)}";
+            }
+
+           
+            return $"{Math.Abs(Numerator)} / {Math.Abs(Denominator)}"; 
         }
 
         //todo: maybe refactor and place it in other module

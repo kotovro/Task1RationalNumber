@@ -33,14 +33,14 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 	<Panel>
-		<Grid DataContext="{Binding ReactiveViewModel}" HorizontalAlignment="Left" VerticalAlignment="Center" ColumnDefinitions="Auto, Auto, Auto, Auto, Auto" RowDefinitions="Auto, Auto, Auto, Auto, Auto">	  
+		<Grid DataContext="{Binding ReactiveViewModel}" HorizontalAlignment="Left" VerticalAlignment="Center" ColumnDefinitions="Auto, Auto, Auto, Auto, Auto, Auto" RowDefinitions="Auto, Auto, Auto, Auto, Auto">	  
 				<TextBlock Text="Numerator" Grid.Row="0" Grid.Column="0" />
 				<TextBox x:Name="NumeratorTextBox" Text="{Binding Numerator}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1"/>
 				<TextBlock Text="Denominator" Grid.Row="2" Grid.Column="0" />
 				<TextBox x:Name="DenominatorTextBox" Text="{Binding Denominator}" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.Row="2" Grid.Column="1"/>
 				<Border Height="2" Background="Black" Margin="5,0" Grid.Row="1" Grid.Column="1"/>
 				<ComboBox ItemsSource="{Binding Operations}" SelectedItem="{Binding SelectedOperation}" Grid.Row="1" Grid.Column="3"  IsEnabled="{Binding IsOperationEnabled}"/>
-				<TextBox  x:Name="MyTextBox" Text="{Binding ToStringText}" HorizontalAlignment="Left"  Grid.Row="4" Grid.Column="4" IsVisible="{Binding VisibleToString}">
+				<TextBox  x:Name="OperationsTextBox" Text="{Binding ToStringText}" Grid.Row="1" Grid.Column="6" IsVisible="{Binding VisibleToString}">
 			 </TextBox>
 		</Grid>
 		

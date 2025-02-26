@@ -43,6 +43,7 @@ namespace Task1RationalNumber.ViewModels
         private RationalNumber baseNum = new RationalNumber();
         private string? _Numerator;
         private string? _Denominator;
+        private const string RegexForInt = "^[-]*?[0-9]+$";
 
         private bool _Enabled = false;
 
@@ -61,8 +62,8 @@ namespace Task1RationalNumber.ViewModels
             set
             {
                 this.RaiseAndSetIfChanged(ref _Numerator, value);
-                if ((!string.IsNullOrWhiteSpace(Numerator) && Regex.IsMatch(Numerator, "^[0-9]+$")) 
-                    && (!string.IsNullOrWhiteSpace(Denominator) && Regex.IsMatch(Denominator, "^[0-9]+$")))
+                if ((!string.IsNullOrWhiteSpace(Numerator) && Regex.IsMatch(Numerator.Trim(), RegexForInt)) 
+                    && (!string.IsNullOrWhiteSpace(Denominator) && Regex.IsMatch(Denominator.Trim(), RegexForInt)))
                 {
                     updateModel();
                     IsOperationEnabled = true;
@@ -81,8 +82,8 @@ namespace Task1RationalNumber.ViewModels
             set
             {
                 this.RaiseAndSetIfChanged(ref _Denominator, value);
-                if ((!string.IsNullOrWhiteSpace(Numerator) && Regex.IsMatch(Numerator, "^[0-9]+$")) 
-                    && (!string.IsNullOrWhiteSpace(Denominator) && Regex.IsMatch(Denominator, "^[0-9]+$")))
+                if ((!string.IsNullOrWhiteSpace(Numerator) && Regex.IsMatch(Numerator, RegexForInt)) 
+                    && (!string.IsNullOrWhiteSpace(Denominator) && Regex.IsMatch(Denominator, RegexForInt)))
                 {
                     updateModel();
                     IsOperationEnabled = true;

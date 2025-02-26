@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Avalonia.Controls.Templates;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -130,6 +131,11 @@ namespace Task1RationalNumber.Models
             return double.Round(Numerator / Denominator, precision);
         }
 
+
+        public string Sign
+        {
+            get => Numerator > 0 && Denominator < 0 || Numerator < 0 && Denominator >= 0 ? "-" : "";          
+        }
         public override string ToString()
         {
             if (Numerator == 0)
@@ -145,16 +151,10 @@ namespace Task1RationalNumber.Models
             }
             if (Denominator == 0)
             {
-                return "infinity(∞)";
+                return $"{Sign}infinity(∞)";
             }
 
-            if (Numerator < 0 && Denominator > 0 || Numerator > 0 && Denominator < 0)
-            {
-                return $"-{Numerator} / {Math.Abs(Denominator)}";
-            }
-
-           
-            return $"{Math.Abs(Numerator)} / {Math.Abs(Denominator)}"; 
+            return $"{Sign}{Math.Abs(Numerator)} / {Math.Abs(Denominator)}"; 
         }
 
         //todo: maybe refactor and place it in other module

@@ -41,6 +41,7 @@ namespace Task1RationalNumber.ViewModels
         }
 
         private RationalNumber baseNum = new RationalNumber();
+        private RationalNumber operandNum = new RationalNumber();
         private string? _Numerator;
         private string? _Denominator;
         private const string RegexForInt = "^[-]*?[0-9]+$";
@@ -103,6 +104,7 @@ namespace Task1RationalNumber.ViewModels
                 _Enabled = value;
                 this.RaisePropertyChanged(nameof(IsOperationEnabled));
                 this.RaisePropertyChanged(nameof(VisibleToString));
+                this.RaisePropertyChanged(nameof(VisibleMultiply));
 
             }
         }
@@ -115,6 +117,16 @@ namespace Task1RationalNumber.ViewModels
         public string ToStringText
         {
             get => baseNum.ToString();
+        }
+
+        public bool VisibleMultiply
+        {
+            get => IsOperationEnabled && SelectedOperation == OperationType.Multiply;
+        }
+
+        public string Multiply
+        {
+            get => (baseNum * operandNum).ToString();
         }
     }
 

@@ -38,11 +38,14 @@ namespace Task1RationalNumber.ViewModels
             {
                 this.RaiseAndSetIfChanged(ref _SelectedOperation, value);
                 this.RaisePropertyChanged(nameof(IsToStringVisible));
+                this.RaisePropertyChanged(nameof(IsOperandVisible));
                 this.RaisePropertyChanged(nameof(IsMultiplyVisible));
                 this.RaisePropertyChanged(nameof(Multiply));
-                this.RaisePropertyChanged(nameof(IsAdditionVisible));
-                this.RaisePropertyChanged(nameof(Addition));
-                this.RaisePropertyChanged(nameof(IsOperandVisible));
+                this.RaisePropertyChanged(nameof(IsAddVisible));
+                this.RaisePropertyChanged(nameof(Add));
+                this.RaisePropertyChanged(nameof(IsSubtractVisible));
+                this.RaisePropertyChanged(nameof(Subtract));
+
             }
         }
 
@@ -67,9 +70,13 @@ namespace Task1RationalNumber.ViewModels
                 this.RaisePropertyChanged(nameof(Multiply));
                 
             }
-            if (IsAdditionVisible)
+            if (IsAddVisible)
             {
-                this.RaisePropertyChanged(nameof(Addition));
+                this.RaisePropertyChanged(nameof(Add));
+            }
+            if (IsSubtractVisible)
+            {
+                this.RaisePropertyChanged(nameof(Subtract));
             }
         }
 
@@ -81,9 +88,13 @@ namespace Task1RationalNumber.ViewModels
             {
                 this.RaisePropertyChanged(nameof(Multiply));
             }
-            if (IsAdditionVisible)
+            if (IsAddVisible)
             {
-                this.RaisePropertyChanged(nameof(Addition));
+                this.RaisePropertyChanged(nameof(Add));
+            }
+            if (IsSubtractVisible)
+            {
+                this.RaisePropertyChanged(nameof(Subtract));
             }
         }
 
@@ -164,7 +175,6 @@ namespace Task1RationalNumber.ViewModels
             {
                 _Enabled = value;
                 this.RaisePropertyChanged(nameof(IsOperationEnabled));
-                this.RaisePropertyChanged(nameof(IsToStringVisible));
             }
         }
 
@@ -180,7 +190,7 @@ namespace Task1RationalNumber.ViewModels
 
         public bool IsOperandVisible
         {
-            get => IsMultiplyVisible || IsAdditionVisible;
+            get => IsMultiplyVisible || IsAddVisible || IsSubtractVisible;
         }
         public bool IsMultiplyVisible
         {
@@ -192,13 +202,22 @@ namespace Task1RationalNumber.ViewModels
             get => (baseNum * operandNum).ToString();
         }
 
-        public bool IsAdditionVisible
+        public bool IsAddVisible
         {
             get => IsOperationEnabled && SelectedOperation == OperationType.Add;
         }
-        public string Addition
+        public string Add
         {
             get => (baseNum + operandNum).ToString();
+        }
+
+        public bool IsSubtractVisible
+        {
+            get => IsOperationEnabled && SelectedOperation == OperationType.Subtract;
+        }
+        public string Subtract
+        {
+            get => (baseNum - operandNum).ToString();
         }
     }
 

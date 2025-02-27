@@ -16,7 +16,7 @@ namespace Task1RationalNumber.Models
             if (denominator == 0)
             {
                 //todo: tgink about passing exceptions to higer levels and how to display them
-                throw new ArgumentException("Denominator cannot be zero", nameof(denominator));
+                //throw new ArgumentException("Denominator cannot be zero", nameof(denominator));
             }
             Numerator = numerator;
             Denominator = denominator;

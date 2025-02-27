@@ -1,4 +1,5 @@
 ﻿using Avalonia.Data.Converters;
+using DynamicData.Diagnostics;
 using ReactiveUI;
 using System;
 using System.Collections.ObjectModel;
@@ -38,6 +39,10 @@ namespace Task1RationalNumber.ViewModels
                 this.RaiseAndSetIfChanged(ref _SelectedOperation, value);
                 this.RaisePropertyChanged(nameof(IsToStringVisible));
                 this.RaisePropertyChanged(nameof(IsMultiplyVisible));
+                this.RaisePropertyChanged(nameof(Multiply));
+                this.RaisePropertyChanged(nameof(IsAdditionVisible));
+                this.RaisePropertyChanged(nameof(Addition));
+                this.RaisePropertyChanged(nameof(IsOperandVisible));
             }
         }
 
@@ -60,6 +65,11 @@ namespace Task1RationalNumber.ViewModels
             if (IsMultiplyVisible)
             {
                 this.RaisePropertyChanged(nameof(Multiply));
+                
+            }
+            if (IsAdditionVisible)
+            {
+                this.RaisePropertyChanged(nameof(Addition));
             }
         }
 
@@ -70,6 +80,10 @@ namespace Task1RationalNumber.ViewModels
             if (IsMultiplyVisible)
             {
                 this.RaisePropertyChanged(nameof(Multiply));
+            }
+            if (IsAdditionVisible)
+            {
+                this.RaisePropertyChanged(nameof(Addition));
             }
         }
 
@@ -151,8 +165,6 @@ namespace Task1RationalNumber.ViewModels
                 _Enabled = value;
                 this.RaisePropertyChanged(nameof(IsOperationEnabled));
                 this.RaisePropertyChanged(nameof(IsToStringVisible));
-                this.RaisePropertyChanged(nameof(IsMultiplyVisible));
-
             }
         }
 
@@ -166,6 +178,10 @@ namespace Task1RationalNumber.ViewModels
             get => baseNum.ToString();
         }
 
+        public bool IsOperandVisible
+        {
+            get => IsMultiplyVisible || IsAdditionVisible;
+        }
         public bool IsMultiplyVisible
         {
             get => IsOperationEnabled && SelectedOperation == OperationType.Multiply;
@@ -174,6 +190,15 @@ namespace Task1RationalNumber.ViewModels
         public string Multiply
         {
             get => (baseNum * operandNum).ToString();
+        }
+
+        public bool IsAdditionVisible
+        {
+            get => IsOperationEnabled && SelectedOperation == OperationType.Add;
+        }
+        public string Addition
+        {
+            get => (baseNum + operandNum).ToString();
         }
     }
 

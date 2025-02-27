@@ -39,12 +39,20 @@
 			<Border Height="2" Background="Black" Margin="5,0" Grid.Row="1" Grid.Column="1"/>
 			<ComboBox ItemsSource="{Binding Operations}" SelectedItem="{Binding SelectedOperation}" Grid.Row="1" Grid.Column="3"  IsEnabled="{Binding IsOperationEnabled}"/>
 			<TextBox x:Name="ToStringResult" Text="{Binding ToStringText}" Grid.Row="1" Grid.Column="6" IsVisible="{Binding IsToStringVisible}" IsReadOnly="True"/>
-			<TextBox x:Name="OperandNumerator" Text="{Binding OperandNumerator}" HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="4" IsVisible="{Binding IsMultiplyVisible}"/>
-			<Border Height="2" Background="Black" Margin="5,0" Grid.Row="1" Grid.Column="4" IsVisible="{Binding IsMultiplyVisible}"/>
-			<TextBox x:Name="OperandDenominator" Text="{Binding OperandDenominator}" HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Row="2" Grid.Column="4" IsVisible="{Binding IsMultiplyVisible}"/>
-			<TextBox x:Name="MultiplyResult" Text="{Binding Multiply}" Grid.Row="1" Grid.Column="6" IsVisible="{Binding IsMultiplyVisible}" IsReadOnly="True"/>
-		</Grid>
-		
-	</Panel>
+			
+			<TextBox x:Name="OperandNumerator" Text="{Binding OperandNumerator}" HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="4" IsVisible="{Binding IsOperandVisible}"/>
+			<Border Height="2" Background="Black" Margin="5,0" Grid.Row="1" Grid.Column="4" IsVisible="{Binding IsOperandVisible}"/>
+			<TextBox x:Name="OperandDenominator" Text="{Binding OperandDenominator}" HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Row="2" Grid.Column="4" IsVisible="{Binding IsOperandVisible}"/>
 
+			
+			<TextBox x:Name="MultiplyResult" Text="{Binding Multiply}" Grid.Row="1" Grid.Column="6" IsVisible="{Binding IsMultiplyVisible}" IsReadOnly="True"/>
+			<TextBox x:Name="AdditionResult" Text="{Binding Addition}" Grid.Row="1" Grid.Column="6" IsVisible="{Binding IsAdditionVisible}" IsReadOnly="True"/>
+
+			<!--
+			<TextBox x:Name="OperandNumerator" Text="{Binding OperandNumerator}" HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="4" IsVisible="{Binding IsAdditionVisible}"/>
+			<Border Height="2" Background="Black" Margin="5,0" Grid.Row="1" Grid.Column="4" IsVisible="{Binding IsAdditionVisible}"/>
+			<TextBox x:Name="OperandDenominator" Text="{Binding OperandDenominator}" HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Row="2" Grid.Column="4" IsVisible="{Binding IsAdditionVisible}"/>-->
+			
+		</Grid>
+	</Panel>
 </Window>

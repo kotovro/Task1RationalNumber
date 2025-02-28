@@ -32,84 +32,101 @@
 			  ColumnDefinitions="Auto, Auto, Auto, Auto, Auto, Auto" 
 			  RowDefinitions="Auto, Auto, Auto, Auto, Auto">	  
 			
+			<TextBox x:Name="DoubleInbput"
+				HorizontalAlignment="Left"
+				VerticalAlignment="Top"
+				Grid.Row="1"
+				Grid.Column="1"
+				IsVisible="{Binding IsFromDoubleVisible}"/>
+			
 			<TextBox x:Name="Numerator" 
-					 Text="{Binding Numerator}" 
-					 HorizontalAlignment="Left" 
-					 VerticalAlignment="Top" 
-					 Grid.Row="0" 
-					 Grid.Column="1"/>
+				Text="{Binding Numerator}" 
+				HorizontalAlignment="Left" 
+				VerticalAlignment="Top" 
+				Grid.Row="0" 
+				Grid.Column="1"
+				IsVisible="{Binding IsBaseVisible}"/>
 			
 			<TextBox x:Name="Denominator" 
-					 Text="{Binding Denominator}" 
-					 HorizontalAlignment="Left" 
-					 VerticalAlignment="Stretch" 
-					 Grid.Row="2" 
-					 Grid.Column="1"/>
+				Text="{Binding Denominator}" 
+				HorizontalAlignment="Left" 
+				VerticalAlignment="Stretch" 
+				Grid.Row="2" 
+				Grid.Column="1"
+				IsVisible="{Binding IsBaseVisible}"/>
 			
 			<Border Height="2" 
-					Background="Black" 
-					Margin="5,0" 
-					Grid.Row="1" 
-					Grid.Column="1"/>
+				Background="Black" 
+				Margin="5,0" 
+				Grid.Row="1" 
+				Grid.Column="1"
+				IsVisible="{Binding IsBaseVisible}"/>
 			
 			<ComboBox ItemsSource="{Binding Operations}" 
-					  SelectedItem="{Binding SelectedOperation}" 
-					  Grid.Row="1" 
-					  Grid.Column="3"  
-					  IsEnabled="{Binding IsOperationEnabled}"/>
+				SelectedItem="{Binding SelectedOperation}" 
+				Grid.Row="1" 
+				Grid.Column="3"  
+				IsEnabled="{Binding IsOperationEnabled}"/>
 			
 			<TextBox x:Name="ToStringResult" 
-					 Text="{Binding ToStringText}" 
-					 Grid.Row="1" 
-					 Grid.Column="6" 
-					 IsVisible="{Binding IsToStringVisible}" 
-					 IsReadOnly="True"/>
+				Text="{Binding ToStringText}" 
+				Grid.Row="1" 
+				Grid.Column="6" 
+				IsVisible="{Binding IsToStringVisible}" 
+				IsReadOnly="True"/>
 			
 			<TextBox x:Name="OperandNumerator"
-					 Text="{Binding OperandNumerator}" 
-					 HorizontalAlignment="Right" 
-					 VerticalAlignment="Stretch" 
-					 Grid.Row="0" 
-					 Grid.Column="4" 
-					 IsVisible="{Binding IsOperandVisible}"/>
+				Text="{Binding OperandNumerator}" 
+				HorizontalAlignment="Right" 
+				VerticalAlignment="Stretch" 
+				Grid.Row="0" 
+				Grid.Column="4" 
+				IsVisible="{Binding IsOperandVisible}"/>
 			
 			<Border Height="2" 
-					Background="Black" 
-					Margin="5,0" 
-					Grid.Row="1"
-					Grid.Column="4" 
-					IsVisible="{Binding IsOperandVisible}"/>
+				Background="Black" 
+				Margin="5,0" 
+				Grid.Row="1"
+				Grid.Column="4" 
+				IsVisible="{Binding IsOperandVisible}"/>
 			
 			<TextBox x:Name="OperandDenominator" 
-					 Text="{Binding OperandDenominator}" 
-					 HorizontalAlignment="Right" 
-					 VerticalAlignment="Stretch" 
-					 Grid.Row="2" 
-					 Grid.Column="4" 
-					 IsVisible="{Binding IsOperandVisible}"/>
+				Text="{Binding OperandDenominator}" 
+				HorizontalAlignment="Right" 
+				VerticalAlignment="Stretch" 
+				Grid.Row="2" 
+				Grid.Column="4" 
+				IsVisible="{Binding IsOperandVisible}"/>
 
 			
 			<TextBox x:Name="MultiplyResult" 
-					 Text="{Binding Multiply}" 
-					 Grid.Row="1" 
-					 Grid.Column="6" 
-					 IsVisible="{Binding IsMultiplyVisible}" 
-					 IsReadOnly="True"/>
+				Text="{Binding Multiply}" 
+				Grid.Row="1" 
+				Grid.Column="6" 
+				IsVisible="{Binding IsMultiplyVisible}" 
+				IsReadOnly="True"/>
 			
 			<TextBox x:Name="AddResult" 
-					 Text="{Binding Add}" 
-					 Grid.Row="1" 
-					 Grid.Column="6" 
-					 IsVisible="{Binding IsAddVisible}" 
-					 IsReadOnly="True"/>
+				Text="{Binding Add}" 
+				Grid.Row="1" 
+				Grid.Column="6" 
+				IsVisible="{Binding IsAddVisible}" 
+				IsReadOnly="True"/>
 
 			<TextBox x:Name="SubtractResult"
-					 Text="{Binding Subtract}"
-					 Grid.Row="1"
-					 Grid.Column="6"
-					 IsVisible="{Binding IsSubtractVisible}"
-					 IsReadOnly="True"/>
+				Text="{Binding Subtract}"
+				Grid.Row="1"
+				Grid.Column="6"
+				IsVisible="{Binding IsSubtractVisible}"
+				IsReadOnly="True"/>
 
+			<TextBox x:Name="FromDoubleResult"
+				Text=""
+				Grid.Row="1"
+				Grid.Column="6"
+				IsVisible="{Binding IsFromDoubleVisible}"
+				IsReadOnly="True"/>
+			
 		</Grid>
 	</Panel>
 </Window>

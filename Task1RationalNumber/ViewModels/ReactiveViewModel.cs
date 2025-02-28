@@ -23,7 +23,8 @@ namespace Task1RationalNumber.ViewModels
             Multiply,
             Add,
             Subtract,
-            Simplify
+            Simplify,
+            FromDouble
         }
 
         private OperationType _SelectedOperation;
@@ -45,10 +46,13 @@ namespace Task1RationalNumber.ViewModels
                 this.RaisePropertyChanged(nameof(Add));
                 this.RaisePropertyChanged(nameof(IsSubtractVisible));
                 this.RaisePropertyChanged(nameof(Subtract));
+                this.RaisePropertyChanged(nameof(IsBaseVisible));
+                this.RaisePropertyChanged(nameof(IsFromDoubleVisible));
 
             }
         }
 
+        private string _FromDouble;
         private RationalNumber baseNum = new RationalNumber();
         private RationalNumber operandNum = new RationalNumber();
         private string? _Numerator;
@@ -215,9 +219,24 @@ namespace Task1RationalNumber.ViewModels
         {
             get => IsOperationEnabled && SelectedOperation == OperationType.Subtract;
         }
+
         public string Subtract
         {
             get => (baseNum - operandNum).ToString();
+        }
+
+        public bool IsBaseVisible
+        {
+            get => !(SelectedOperation == OperationType.FromDouble);
+        }
+        public bool IsFromDoubleVisible
+        {
+            get => IsOperationEnabled && SelectedOperation == OperationType.FromDouble;
+        }
+
+        public string FromDouble
+        {
+            get => _FromDouble;
         }
     }
 

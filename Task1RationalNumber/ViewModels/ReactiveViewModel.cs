@@ -59,31 +59,38 @@ namespace Task1RationalNumber.ViewModels
         private string? _Denominator;
         private string? _OperandNumerator;
         private string? _OperandDenominator;
+        private bool _Enabled = false;
 
         private const string RegexForInt = "^[-]*?[0-9]+$";
 
-        private bool _Enabled = false;
+        
 
-        private void updateBaseModel()
+        private void UpdateBaseModel()
         {
             baseNum.Numerator = Int32.Parse(Numerator);
             baseNum.Denominator = Int32.Parse(Denominator);
+            this.RaisePropertyChanged(nameof(IsToStringVisible));
             this.RaisePropertyChanged(nameof(ToStringText));
-            if (IsMultiplyVisible)
-            {
-                this.RaisePropertyChanged(nameof(Multiply));
-                
-            }
-            if (IsAddVisible)
-            {
-                this.RaisePropertyChanged(nameof(Add));
-            }
-            if (IsSubtractVisible)
-            {
-                this.RaisePropertyChanged(nameof(Subtract));
-            }
+            this.RaisePropertyChanged(nameof(IsOperandVisible));
+            this.RaisePropertyChanged(nameof(IsMultiplyVisible));
+            this.RaisePropertyChanged(nameof(Multiply));
+            this.RaisePropertyChanged(nameof(IsAddVisible));
+            this.RaisePropertyChanged(nameof(Add));
+            this.RaisePropertyChanged(nameof(IsSubtractVisible));
+            this.RaisePropertyChanged(nameof(Subtract));
         }
-
+        private void DisableOperations()
+        {
+            this.RaisePropertyChanged(nameof(IsToStringVisible));
+            this.RaisePropertyChanged(nameof(ToStringText));
+            this.RaisePropertyChanged(nameof(IsOperandVisible));
+            this.RaisePropertyChanged(nameof(IsMultiplyVisible));
+            this.RaisePropertyChanged(nameof(Multiply));
+            this.RaisePropertyChanged(nameof(IsAddVisible));
+            this.RaisePropertyChanged(nameof(Add));
+            this.RaisePropertyChanged(nameof(IsSubtractVisible));
+            this.RaisePropertyChanged(nameof(Subtract));
+        }
         private void updateOperandModel()
         {
             operandNum.Numerator = Int32.Parse(OperandNumerator);
@@ -112,12 +119,14 @@ namespace Task1RationalNumber.ViewModels
                 if ((!string.IsNullOrWhiteSpace(Numerator) && Regex.IsMatch(Numerator.Trim(), RegexForInt)) 
                     && (!string.IsNullOrWhiteSpace(Denominator) && Regex.IsMatch(Denominator.Trim(), RegexForInt)))
                 {
-                    updateBaseModel();
                     IsOperationEnabled = true;
+                    UpdateBaseModel();
                 }
                 else
                 {
                     IsOperationEnabled = false;
+                    DisableOperations();
+                    
                 }
             }
         }
@@ -132,12 +141,13 @@ namespace Task1RationalNumber.ViewModels
                 if ((!string.IsNullOrWhiteSpace(Numerator) && Regex.IsMatch(Numerator, RegexForInt)) 
                     && (!string.IsNullOrWhiteSpace(Denominator) && Regex.IsMatch(Denominator, RegexForInt)))
                 {
-                    updateBaseModel();
                     IsOperationEnabled = true;
+                    UpdateBaseModel();
                 }
                 else
                 {
                     IsOperationEnabled = false;
+                    DisableOperations();
                 }
             }
         }

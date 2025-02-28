@@ -32,7 +32,7 @@
 			  ColumnDefinitions="Auto, Auto, Auto, Auto, Auto, Auto" 
 			  RowDefinitions="Auto, Auto, Auto, Auto, Auto">	  
 			
-			<TextBox x:Name="DoubleInbput"
+			<TextBox x:Name="DoubleInput"
 				HorizontalAlignment="Left"
 				VerticalAlignment="Top"
 				Grid.Row="1"
@@ -40,27 +40,27 @@
 				IsVisible="{Binding IsFromDoubleVisible}"/>
 			
 			<TextBox x:Name="Numerator" 
-				Text="{Binding Numerator}" 
+				Text="{Binding BaseOperandNumerator}" 
 				HorizontalAlignment="Left" 
 				VerticalAlignment="Top" 
 				Grid.Row="0" 
 				Grid.Column="1"
-				IsVisible="{Binding IsBaseVisible}"/>
+				IsVisible="{Binding IsBaseOperandVisible}"/>
 			
 			<TextBox x:Name="Denominator" 
-				Text="{Binding Denominator}" 
+				Text="{Binding BaseOperandDenominator}" 
 				HorizontalAlignment="Left" 
 				VerticalAlignment="Stretch" 
 				Grid.Row="2" 
 				Grid.Column="1"
-				IsVisible="{Binding IsBaseVisible}"/>
+				IsVisible="{Binding IsBaseOperandVisible}"/>
 			
 			<Border Height="2" 
 				Background="Black" 
 				Margin="5,0" 
 				Grid.Row="1" 
 				Grid.Column="1"
-				IsVisible="{Binding IsBaseVisible}"/>
+				IsVisible="{Binding IsBaseOperandVisible}"/>
 			
 			<ComboBox ItemsSource="{Binding Operations}" 
 				SelectedItem="{Binding SelectedOperation}" 
@@ -76,27 +76,27 @@
 				IsReadOnly="True"/>
 			
 			<TextBox x:Name="OperandNumerator"
-				Text="{Binding OperandNumerator}" 
+				Text="{Binding SecondOperandNumerator}" 
 				HorizontalAlignment="Right" 
 				VerticalAlignment="Stretch" 
 				Grid.Row="0" 
 				Grid.Column="4" 
-				IsVisible="{Binding IsOperandVisible}"/>
+				IsVisible="{Binding IsSecondOperandVisible}"/>
 			
 			<Border Height="2" 
 				Background="Black" 
 				Margin="5,0" 
 				Grid.Row="1"
 				Grid.Column="4" 
-				IsVisible="{Binding IsOperandVisible}"/>
+				IsVisible="{Binding IsSecondOperandVisible}"/>
 			
 			<TextBox x:Name="OperandDenominator" 
-				Text="{Binding OperandDenominator}" 
+				Text="{Binding SecondOperandDenominator}" 
 				HorizontalAlignment="Right" 
 				VerticalAlignment="Stretch" 
 				Grid.Row="2" 
 				Grid.Column="4" 
-				IsVisible="{Binding IsOperandVisible}"/>
+				IsVisible="{Binding IsSecondOperandVisible}"/>
 
 			
 			<TextBox x:Name="MultiplyResult" 

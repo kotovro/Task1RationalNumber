@@ -54,6 +54,7 @@ namespace Task1RationalNumber.ViewModels
         private bool _Enabled = false;
 
         private const string RegexForInt = "^[-]*?[0-9]+$";
+        private const string RegexForDouble = "^^-?\\d+\\.\\d+$";
 
         
 
@@ -235,6 +236,14 @@ namespace Task1RationalNumber.ViewModels
         public string FromDouble
         {
             get => _FromDouble;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _FromDouble, value);
+                if (!string.IsNullOrWhiteSpace(FromDouble) && Regex.IsMatch(FromDouble.Trim(), RegexForDouble))    
+                {
+                    _FromDouble = RationalNumber.FromDouble(value);
+                }
+            }
             
         }   
         

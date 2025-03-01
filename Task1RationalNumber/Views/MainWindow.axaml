@@ -7,50 +7,63 @@
 		x:DataType="vm:MainWindowViewModel"
 		x:Class="Task1RationalNumber.Views.MainWindow"
 		x:CompileBindings="True"
-		
+		MaxWidth="800"
+		MaxHeight="700"
+		MinHeight="400"
+		MinWidth="300"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Rational number">
+        Title="Simple Fractions">
 	<Window.Styles>
-		<Style Selector="Button">
-			<Setter Property="Background" Value="Green"/>
-		</Style>
-		<Style Selector="TextBox#MyTextBox">
-			
-			<Setter Property="Opacity" Value="1.0" />
+		
+		<Style Selector="TextBox.OutputTextBox">
+			<Setter Property="IsReadOnly" Value="True"/>
+			<Setter Property="FontSize" Value="20"/>
+			<Setter Property="TextAlignment" Value="Center"/>
+			<Setter Property="Margin" Value="10, 10"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="CornerRadius" Value="10"/>
 
 		</Style>
+
+		<Style Selector="TextBox.InputTextBox">
+			<Setter Property="CornerRadius" Value="10"/>
+			<Setter Property="FontSize" Value="20"/>
+			<Setter Property="TextAlignment" Value="Center"/>
+			<Setter Property="Margin" Value="10, 10"/>
+			<Setter Property="HorizontalAlignment" Value="Right"/>
+			<Setter Property="VerticalAlignment" Value="Bottom"/>
+		</Style>
+	
 	</Window.Styles>
     <Design.DataContext>
 		<!--This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs)-->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-	<Panel>
-		<Grid DataContext="{Binding ReactiveViewModel}"
-			  HorizontalAlignment="Left" 
-			  VerticalAlignment="Center" 
+	<Panel	HorizontalAlignment="Center"
+			VerticalAlignment="Center">
+		<Grid DataContext="{Binding ReactiveViewModel}" 
 			  ColumnDefinitions="Auto, Auto, Auto, Auto, Auto, Auto" 
 			  RowDefinitions="Auto, Auto, Auto, Auto, Auto">	  
 			
 			<TextBox x:Name="DoubleInput"
+				Classes="InputTextBox"
 				HorizontalAlignment="Left"
 				VerticalAlignment="Top"
 				Grid.Row="1"
 				Grid.Column="1"
 				IsVisible="{Binding IsFromDoubleVisible}"/>
 			
-			<TextBox x:Name="Numerator" 
-				Text="{Binding BaseOperandNumerator}" 
-				HorizontalAlignment="Left" 
-				VerticalAlignment="Top" 
+			<TextBox x:Name="Numerator"
+				Classes="InputTextBox"
+				Text="{Binding BaseOperandNumerator}"
 				Grid.Row="0" 
 				Grid.Column="1"
 				IsVisible="{Binding IsBaseOperandVisible}"/>
 			
 			<TextBox x:Name="Denominator" 
-				Text="{Binding BaseOperandDenominator}" 
-				HorizontalAlignment="Left" 
-				VerticalAlignment="Stretch" 
+				Classes="InputTextBox"
+				Text="{Binding BaseOperandDenominator}"
 				Grid.Row="2" 
 				Grid.Column="1"
 				IsVisible="{Binding IsBaseOperandVisible}"/>
@@ -65,20 +78,13 @@
 			<ComboBox ItemsSource="{Binding Operations}" 
 				SelectedItem="{Binding SelectedOperation}" 
 				Grid.Row="1" 
-				Grid.Column="3"  
+				Grid.Column="3"
+				FontSize="20"
 				IsEnabled="{Binding IsOperationEnabled}"/>
 			
-			<TextBox x:Name="ToStringResult" 
-				Text="{Binding ToStringText}" 
-				Grid.Row="1" 
-				Grid.Column="6" 
-				IsVisible="{Binding IsToStringVisible}" 
-				IsReadOnly="True"/>
-			
 			<TextBox x:Name="OperandNumerator"
-				Text="{Binding SecondOperandNumerator}" 
-				HorizontalAlignment="Right" 
-				VerticalAlignment="Stretch" 
+				Classes="InputTextBox"
+				Text="{Binding SecondOperandNumerator}"
 				Grid.Row="0" 
 				Grid.Column="4" 
 				IsVisible="{Binding IsSecondOperandVisible}"/>
@@ -91,42 +97,46 @@
 				IsVisible="{Binding IsSecondOperandVisible}"/>
 			
 			<TextBox x:Name="OperandDenominator" 
-				Text="{Binding SecondOperandDenominator}" 
-				HorizontalAlignment="Right" 
-				VerticalAlignment="Stretch" 
+				Classes="InputTextBox"
+				Text="{Binding SecondOperandDenominator}"
 				Grid.Row="2" 
 				Grid.Column="4" 
 				IsVisible="{Binding IsSecondOperandVisible}"/>
 
+			<TextBox x:Name="ToStringResult"
+				Text="{Binding ToStringText}"
+				Classes="OutputTextBox"
+				Grid.Row="1"
+				Grid.Column="6"
+				IsVisible="{Binding IsToStringVisible}"/>
 			
 			<TextBox x:Name="MultiplyResult" 
 				Text="{Binding Multiply}" 
+				Classes="OutputTextBox"
 				Grid.Row="1" 
 				Grid.Column="6" 
-				IsVisible="{Binding IsMultiplyVisible}" 
-				IsReadOnly="True"/>
+				IsVisible="{Binding IsMultiplyVisible}"/>
 			
 			<TextBox x:Name="AddResult" 
 				Text="{Binding Add}" 
+				Classes="OutputTextBox"
 				Grid.Row="1" 
 				Grid.Column="6" 
-				IsVisible="{Binding IsAddVisible}" 
-				IsReadOnly="True"/>
+				IsVisible="{Binding IsAddVisible}"/>
 
 			<TextBox x:Name="SubtractResult"
 				Text="{Binding Subtract}"
+				Classes="OutputTextBox"
 				Grid.Row="1"
 				Grid.Column="6"
-				IsVisible="{Binding IsSubtractVisible}"
-				IsReadOnly="True"/>
+				IsVisible="{Binding IsSubtractVisible}"/>
 
 			<TextBox x:Name="FromDoubleResult"
-				Text=""
+				Classes="OutputTextBox"
+				Text="{Binding FromDouble}"
 				Grid.Row="1"
 				Grid.Column="6"
-				IsVisible="{Binding IsFromDoubleVisible}"
-				IsReadOnly="True"/>
-			
+				IsVisible="{Binding IsFromDoubleVisible}"/>
 		</Grid>
 	</Panel>
 </Window>

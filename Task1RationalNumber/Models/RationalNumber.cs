@@ -13,11 +13,6 @@ namespace Task1RationalNumber.Models
 
         public RationalNumber(int numerator, int denominator)
         {
-            if (denominator == 0)
-            {
-                //todo: tgink about passing exceptions to higer levels and how to display them
-                //throw new ArgumentException("Denominator cannot be zero", nameof(denominator));
-            }
             Numerator = numerator;
             Denominator = denominator;
         }
@@ -131,6 +126,13 @@ namespace Task1RationalNumber.Models
             return double.Round(Numerator / Denominator, precision);
         }
 
+        public static string FromDouble(string Number)
+        {
+            int IntPart = Int32.Parse(Number.Split(".")[0]);
+            int RestPart = Int32.Parse(Number.Split(".")[1]);
+            int RestLen = Number.Split(".")[1].Length;
+            return $"{IntPart * Math.Pow(10, RestLen) + RestPart} / {Math.Pow(10, RestLen)}"; 
+        }
 
         public string Sign
         {

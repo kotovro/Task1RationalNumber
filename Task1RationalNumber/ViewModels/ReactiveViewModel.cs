@@ -82,7 +82,6 @@ namespace Task1RationalNumber.ViewModels
             this.RaisePropertyChanged(nameof(ToStringText));
             this.RaisePropertyChanged(nameof(IsBaseOperandVisible));
             this.RaisePropertyChanged(nameof(IsFromDoubleVisible));
-            this.RaisePropertyChanged(nameof(FromDouble));
         }
 
         private void TriggerBinaryOperationsBindings()
@@ -135,6 +134,10 @@ namespace Task1RationalNumber.ViewModels
                     IsOperationEnabled = false;
                 }
                 TriggerAllOperationsBindings();
+                if (IsFromDoubleVisible)
+                {
+                    FromDouble = value;
+                }
             }
         }
 
@@ -151,6 +154,10 @@ namespace Task1RationalNumber.ViewModels
                     UpdateSecondOperandModel();
                 }
                 TriggerBinaryOperationsBindings();
+                if (IsFromDoubleVisible)
+                {
+                    FromDouble = value;
+                }
             }
         }
 
@@ -233,6 +240,7 @@ namespace Task1RationalNumber.ViewModels
             get => IsOperationEnabled && SelectedOperation == OperationType.FromDouble;
         }
 
+        [Required]
         public string FromDouble
         {
             get => _FromDouble;

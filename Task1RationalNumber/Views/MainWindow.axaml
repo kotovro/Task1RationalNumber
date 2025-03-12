@@ -48,6 +48,7 @@
 			
 			<TextBox x:Name="DoubleInput"
 				Classes="InputTextBox"
+				Text="{Binding FromDouble}"
 				HorizontalAlignment="Left"
 				VerticalAlignment="Top"
 				Grid.Row="1"
